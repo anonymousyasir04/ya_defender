@@ -1,0 +1,602 @@
+# 🛡️ YA DEFENDER –
+**Developed by Yasir Abbas**  
+*"Your System's Last Line of Defense"*
+
+---
+
+## 📋 EXECUTIVE SUMMARY
+
+**YA DEFENDER** is a professional, military-grade Windows malware defense system created by **Yasir Abbas**. It combines:
+
+- **AI-powered detection** (ONNX Runtime with XGBoost, GRU, and CNN models)
+- **Real-time behavioral monitoring** (ETW, AMSI, Registry Guardian)
+- **Advanced remediation** (Ransomware Shield, Volume Shadow Copy rollback, System Repair)
+- **Visual forensics** (Process Tree Visualizer, Live Attack Map)
+- **Identity protection** (Breach Monitoring, Password Health)
+- **Network quarantine** (DNS blocking via hosts file)
+- **USB drive protection** (Auto-scan removable media)
+- **Multilingual voice control** (English/Urdu) with chat interface
+
+**Unique Selling Proposition (USP):** YA Defender doesn't just *detect* malware – it *visualizes the attack chain, blocks network exfiltration, repairs damaged system files, and protects user identities* – all in one beautiful, real-time dashboard with voice interaction.
+
+---
+
+## 🏗️ COMPLETE SYSTEM ARCHITECTURE
+
+```
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                        YA DEFENDER SYSTEM                                 │
+├─────────────────────────────────────────────────────────────────────────────┤
+│                                                                             │
+│  ┌──────────────────┐  ┌──────────────────┐  ┌──────────────────────────┐ │
+│  │  USER INTERFACE  │  │  AI ENGINE       │  │  MONITORING ENGINE       │ │
+│  │  (WPF + MVVM)   │  │  (ONNX Runtime)   │  │  (ETW + WMI + AMSI)     │ │
+│  │  - Live Dashboard│  │  - PE Analyzer   │  │  - Process Tree         │ │
+│  │  - Attack Map    │  │  - XGBoost (PE)  │  │  - File System          │ │
+│  │  - Process Graph │  │  - GRU (Dynamic) │  │  - Registry Guardian    │ │
+│  │  - Search Bar    │  │  - CNN (Anomaly) │  │  - Network Monitor      │ │
+│  └────────┬─────────┘  └────────┬─────────┘  └────────────┬─────────────┘ │
+│           │                     │                         │               │
+│           └─────────────────────┼─────────────────────────┘               │
+│                                 ▼                                          │
+│                    ┌─────────────────────────────┐                         │
+│                    │  DECISION & REMEDIATION     │                         │
+│                    │  - Threat Scoring (0-100)   │                         │
+│                    │  - Auto-Quarantine          │                         │
+│                    │  - Ransomware Shield        │                         │
+│                    │  - VSS Rollback             │                         │
+│                    │  - System Repair (SFC/DISM) │                         │
+│                    │  - DNS Quarantine (hosts)   │                         │
+│                    └─────────────────────────────┘                         │
+│                                 │                                          │
+│           ┌─────────────────────┼─────────────────────┐                   │
+│           ▼                     ▼                     ▼                   │
+│  ┌───────────────┐  ┌───────────────────┐  ┌──────────────────────────┐ │
+│  │  QUARANTINE   │  │  LOGGING (SQLite) │  │  REPORTING               │ │
+│  │  (AES-256)    │  │  - Process Logs   │  │  - PDF Report            │ │
+│  │  - Restore    │  │  - File Logs      │  │  - MITRE ATT&CK Map      │ │
+│  │  - Delete     │  │  - Registry Logs  │  │  - Threat Hunter Search  │ │
+│  │  - Upload     │  │  - Network Logs   │  │  - Export JSON/CSV       │ │
+│  └───────────────┘  └───────────────────┘  └──────────────────────────┘ │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+```
+
+---
+
+## 🔥 15 CORE FEATURES (Complete List)
+
+### 🛡️ Detection & Analysis (Features 1-5)
+
+| # | Feature | Description | Technology |
+|---|---------|-------------|------------|
+| **1** | **PE File Analyzer** | Parse headers, sections, imports/exports, entropy, packer detection | PeNet library |
+| **2** | **ONNX AI Engine** | 3 models: XGBoost (PE static), GRU (behavioral), CNN+Autoencoder (anomaly) | ONNX Runtime |
+| **3** | **AMSI Integration** | Scan PowerShell/VBS/Python scripts before execution | Windows AMSI API |
+| **4** | **Memory Scanner (YARA)** | Scan process memory for shellcode/injection | YARA rules + ReadProcessMemory |
+| **5** | **USB Drive Guardian** | Auto-scan removable drives for malware | DriveInfo + FileSystemWatcher |
+
+### 🎯 Monitoring & Defense (Features 6-10)
+
+| # | Feature | Description | Technology |
+|---|---------|-------------|------------|
+| **6** | **Real-Time ETW Monitor** | Process creation, file writes, registry changes, network connections | Event Tracing for Windows |
+| **7** | **Registry Guardian** | Monitor `Run`, `RunOnce`, `Services` keys. Revert suspicious changes instantly | WMI + RegNotifyChangeKeyValue |
+| **8** | **Process Tree Visualizer** | Live animated graph showing malware attack chain | WPF Canvas + WMI Process queries |
+| **9** | **Network DNS Quarantine** | Block malicious domains via hosts file | File.AppendAllText(hosts) |
+| **10** | **Ransomware Shield** | Detect encryption (entropy + I/O rate), suspend process, rollback via VSS | Volume Shadow Copy + Process Suspension |
+
+### 🛠️ Remediation & Recovery (Features 11-13)
+
+| # | Feature | Description | Technology |
+|---|---------|-------------|------------|
+| **11** | **One-Click System Repair** | Run SFC, DISM, CHKDSK to fix corrupted system files | Process.Start + Administrative rights |
+| **12** | **Auto-Restore Point** | Create System Restore Point before any quarantine/deletion | SystemRestore COM object |
+| **13** | **Quarantine (AES-256)** | Encrypt suspicious files, store securely, restore/delete options | System.Security.Cryptography |
+
+### 📊 UI & Forensics (Features 14-15)
+
+| # | Feature | Description | Technology |
+|---|---------|-------------|------------|
+| **14** | **Live Dashboard** | Real-time event feed, threat radar, MITRE ATT&CK mapping, attack map | WPF + SignalR (real-time) |
+| **15** | **Threat Hunter Search** | Search logs: `process:powershell.exe`, `file:*.exe`, `ip:185.*` | SQLite LIKE queries |
+
+### 🔐 Identity & Extra (Features 16-17)
+
+| # | Feature | Description | Technology |
+|---|---------|-------------|------------|
+| **16** | **HaveIBeenPwned Integration** | Check browser passwords against data breaches | HIBP API (SHA1 prefix) |
+| **17** | **Gaming/Idle Mode** | Auto-pause scans when full-screen game is running | GetForegroundWindow() + CPU throttling |
+
+---
+
+## 🎨 UI DESIGN – 4 TABS + DASHBOARD
+
+### Tab 1: HOME (Live Dashboard)
+
+```
+┌─────────────────────────────────────────────────────────────────────────────┐
+│  🛡️ YA DEFENDER                          🔴 2 Active Threats   🟢 Protected│
+│  Yasir Abbas – Ultimate Malware Defense Engine                            │
+├─────────────────────────────────────────────────────────────────────────────┤
+│                                                                             │
+│  ┌────────────────────────────┐  ┌────────────────────────────────────────┐ │
+│  │  📊 THREAT OVERVIEW        │  │  📈 LIVE THREAT FEED                  │ │
+│  │  ┌──────┬──────┬──────┐   │  │  [14:32:01] 🛑 Blocked: "setup.exe"  │ │
+│  │  │ 42   │  3   │  12  │   │  │             (Ransomware)               │ │
+│  │  │Safe  │Threat│Clean │   │  │  [14:31:15] ⚠️ Suspicious: powershell │ │
+│  │  └──────┴──────┴──────┘   │  │             (AMSI detected obfuscation)│ │
+│  │  🟢 System Integrity: 98%│  │  [14:30:02] 🔵 Process: svchost.exe   │ │
+│  └────────────────────────────┘  │             (Normal)                   │ │
+│                                   └────────────────────────────────────────┘ │
+│                                                                             │
+│  ┌─────────────────────────────────────────────────────────────────────────┐│
+│  │  🔍 THREAT HUNTER SEARCH                                                ││
+│  │  [process:powershell.exe]  [🔍 Search]  [📋 Export Results]            ││
+│  │  Results: 5 matches found in the last 24 hours.                       ││
+│  └─────────────────────────────────────────────────────────────────────────┘│
+│                                                                             │
+│  ┌─────────────────────────────────────────────────────────────────────────┐│
+│  │  🌐 LIVE ATTACK MAP (Geo-IP)                                            ││
+│  │  [World Map showing red dots for C2 connections]                       ││
+│  └─────────────────────────────────────────────────────────────────────────┘│
+│                                                                             │
+│  ┌─────────────────────────────────────────────────────────────────────────┐│
+│  │  🧠 PROCESS TREE VISUALIZER (Live)                                     ││
+│  │  Outlook.exe ─┬─> PowerShell.exe ─┬─> malware.exe ─┬─> Registry       ││
+│  │               │                   │               └─> File Encrypt    ││
+│  │               │                   └─> C2 Connection (185.165.*)       ││
+│  │               └─> Word.exe (Macro)                                    ││
+│  └─────────────────────────────────────────────────────────────────────────┘│
+└─────────────────────────────────────────────────────────────────────────────┘
+```
+
+### Tab 2: SCAN
+
+```
+┌─────────────────────────────────────────────────────────────────────────────┐
+│  🔍 SCAN                                                                   │
+├─────────────────────────────────────────────────────────────────────────────┤
+│  [📁 Quick Scan]  [🔬 Full Scan]  [🎯 Custom Scan]  [💾 USB Drive Scan]   │
+│                                                                             │
+│  ┌─────────────────────────────────────────────────────────────────────────┐│
+│  │  📥 Drag & Drop Files/Folders Here                                     ││
+│  └─────────────────────────────────────────────────────────────────────────┘│
+│                                                                             │
+│  Progress: ████████████████████░░░░░░  78%  (42/120 files scanned)       │
+│  ETA: 12 seconds                                                           │
+│                                                                             │
+│  ┌─────────────────────────────────────────────────────────────────────────┐│
+│  │  SCAN RESULTS                                                          ││
+│  │  ✅ C:\Windows\System32\calc.exe - Clean (0.2s)                       ││
+│  │  ✅ C:\Program Files\App\app.exe - Clean (0.3s)                       ││
+│  │  🔴 C:\Users\Downloads\setup.exe - MALICIOUS DETECTED (1.2s)         ││
+│  │     Risk: 92/100 | Type: Ransomware | Click to Quarantine             ││
+│  │  ⚠️ C:\Users\Public\script.ps1 - Suspicious (AMSI flagged)           ││
+│  └─────────────────────────────────────────────────────────────────────────┘│
+└─────────────────────────────────────────────────────────────────────────────┘
+```
+
+### Tab 3: QUARANTINE
+
+```
+┌─────────────────────────────────────────────────────────────────────────────┐
+│  📦 QUARANTINE                                                              │
+├─────────────────────────────────────────────────────────────────────────────┤
+│  [↩️ Restore All]  [🗑️ Delete All]  [📤 Upload to Cloud]  [📄 Export]     │
+│                                                                             │
+│  ┌─────────────────────────────────────────────────────────────────────────┐│
+│  │  📁 setup.exe    | Ransomware  | 92 | 2026-07-30  [↩️][🗑️][📤]      ││
+│  │  📁 adware.dll   | Adware      | 72 | 2026-07-28  [↩️][🗑️][📤]      ││
+│  │  📁 trojan.scr   | Trojan      | 88 | 2026-07-27  [↩️][🗑️][📤]      ││
+│  │  📁 macro.docm   | Macro Virus | 65 | 2026-07-26  [↩️][🗑️][📤]      ││
+│  └─────────────────────────────────────────────────────────────────────────┘│
+│                                                                             │
+│  Click any file to view: Hash, Original Path, Threat Type, MITRE Mapping   │
+└─────────────────────────────────────────────────────────────────────────────┘
+```
+
+### Tab 4: PROFILE (Settings)
+
+```
+┌─────────────────────────────────────────────────────────────────────────────┐
+│  ⚙️ PROFILE                                                   Created by   │
+│                                                                 Yasir Abbas│
+├─────────────────────────────────────────────────────────────────────────────┤
+│  ┌─────────────────────────────────────────────────────────────────────────┐│
+│  │  🛡️ PROTECTION SETTINGS                                               ││
+│  │  [✓] Real-Time Scanning   [✓] Auto-Quarantine                         ││
+│  │  [✓] Ransomware Shield    [✓] Registry Guardian                       ││
+│  │  [✓] DNS Quarantine       [✓] USB Drive Scanner                       ││
+│  │  [✓] Gaming Mode          [✓] AMSI Integration                        ││
+│  └─────────────────────────────────────────────────────────────────────────┘│
+│                                                                             │
+│  ┌─────────────────────────────────────────────────────────────────────────┐│
+│  │  🤖 AI MODELS                                                          ││
+│  │  XGBoost-RF (v2.1)  ✅ Loaded  |  GRU-DNN (v1.8)  ✅ Loaded          ││
+│  │  CNN+Autoencoder (v1.2)  ✅ Loaded                                     ││
+│  │  [📥 Update All Models]  [🔄 Check for Updates]                       ││
+│  └─────────────────────────────────────────────────────────────────────────┘│
+│                                                                             │
+│  ┌─────────────────────────────────────────────────────────────────────────┐│
+│  │  🔐 IDENTITY PROTECTION                                               ││
+│  │  [Check Passwords Against Breaches]  [🔍 Scan Now]                    ││
+│  │  Status: 2 passwords compromised. Click to view details.              ││
+│  └─────────────────────────────────────────────────────────────────────────┘│
+│                                                                             │
+│  ┌─────────────────────────────────────────────────────────────────────────┐│
+│  │  🛠️ SYSTEM REPAIR                                                     ││
+│  │  [🔧 Fix Corrupted System Files]  [🔄 Create Restore Point]           ││
+│  │  Last SFC Scan: 2 days ago - No integrity violations detected.        ││
+│  └─────────────────────────────────────────────────────────────────────────┘│
+│                                                                             │
+│  ┌─────────────────────────────────────────────────────────────────────────┐│
+│  │  📊 EXPORT & LOGS                                                      ││
+│  │  [📄 Export PDF Report]  [📤 Export Logs (ZIP)]  [🗑️ Clear All Logs] ││
+│  └─────────────────────────────────────────────────────────────────────────┘│
+└─────────────────────────────────────────────────────────────────────────────┘
+```
+
+---
+
+## 💻 COMPLETE TECHNOLOGY STACK
+
+| Component | Technology | Version |
+|-----------|------------|---------|
+| **Language** | C# .NET | 8.0 |
+| **UI Framework** | WPF + MVVM | .NET 8 |
+| **AI Runtime** | ONNX Runtime | 1.16+ |
+| **ML Library** | ML.NET | 3.0+ |
+| **PE Analysis** | PeNet | 2.1+ |
+| **Database** | SQLite | 3.44+ |
+| **Logging** | Serilog | 3.1+ |
+| **AMSI** | Windows AMSI COM | Built-in |
+| **ETW** | Event Tracing for Windows | Built-in |
+| **Process Management** | System.Diagnostics | Built-in |
+| **Registry** | Microsoft.Win32 | Built-in |
+| **Network** | System.Net.Http | Built-in |
+| **Speech Recognition** | Rhino Speech‑to‑Intent (Picovoice) | On‑device |
+| **Text‑to‑Speech** | KokoroSharp (ONNX TTS) | On‑device |
+
+---
+
+## 🗄️ DATABASE SCHEMA (SQLite)
+
+### Table 1: `process_events`
+| Column | Type | Description |
+|--------|------|-------------|
+| `id` | INTEGER (PK) | Auto-increment |
+| `process_name` | TEXT | Name of process |
+| `pid` | INTEGER | Process ID |
+| `parent_pid` | INTEGER | Parent process ID |
+| `command_line` | TEXT | Full command line |
+| `user` | TEXT | User who ran it |
+| `timestamp` | DATETIME | Time of event |
+| `is_suspicious` | BOOLEAN | Flagged by AI |
+
+### Table 2: `file_events`
+| Column | Type | Description |
+|--------|------|-------------|
+| `id` | INTEGER (PK) | Auto-increment |
+| `file_path` | TEXT | Full file path |
+| `action` | TEXT | Created/Changed/Deleted |
+| `size` | INTEGER | File size in bytes |
+| `entropy` | REAL | Shannon entropy |
+| `process_pid` | INTEGER | PID that wrote file |
+| `timestamp` | DATETIME | Time of event |
+| `is_suspicious` | BOOLEAN | Flagged by AI |
+
+### Table 3: `registry_events`
+| Column | Type | Description |
+|--------|------|-------------|
+| `id` | INTEGER (PK) | Auto-increment |
+| `key_path` | TEXT | Registry key path |
+| `value_name` | TEXT | Value name |
+| `value_data` | TEXT | Value data |
+| `action` | TEXT | Created/Modified/Deleted |
+| `process_pid` | INTEGER | PID that modified registry |
+| `timestamp` | DATETIME | Time of event |
+| `is_suspicious` | BOOLEAN | Flagged by AI |
+
+### Table 4: `network_events`
+| Column | Type | Description |
+|--------|------|-------------|
+| `id` | INTEGER (PK) | Auto-increment |
+| `destination_ip` | TEXT | Remote IP address |
+| `destination_port` | INTEGER | Remote port |
+| `protocol` | TEXT | TCP/UDP |
+| `process_pid` | INTEGER | PID making connection |
+| `timestamp` | DATETIME | Time of event |
+| `is_suspicious` | BOOLEAN | Flagged by AI |
+
+### Table 5: `scan_results`
+| Column | Type | Description |
+|--------|------|-------------|
+| `id` | INTEGER (PK) | Auto-increment |
+| `file_path` | TEXT | Full file path |
+| `file_hash` | TEXT | SHA256 hash |
+| `risk_score` | INTEGER | 0-100 |
+| `threat_type` | TEXT | Ransomware/Spyware/Trojan/etc. |
+| `detection_method` | TEXT | PE/AMSI/YARA/Cloud |
+| `is_quarantined` | BOOLEAN | True if quarantined |
+| `timestamp` | DATETIME | Time of scan |
+
+### Table 6: `quarantine`
+| Column | Type | Description |
+|--------|------|-------------|
+| `id` | INTEGER (PK) | Auto-increment |
+| `original_path` | TEXT | Original file location |
+| `file_name` | TEXT | Original file name |
+| `file_hash` | TEXT | SHA256 hash |
+| `threat_type` | TEXT | Threat classification |
+| `risk_score` | INTEGER | 0-100 |
+| `quarantine_path` | TEXT | AES-256 encrypted storage path |
+| `timestamp` | DATETIME | Time of quarantine |
+| `restored` | BOOLEAN | True if restored |
+
+### Table 7: `breach_checks`
+| Column | Type | Description |
+|--------|------|-------------|
+| `id` | INTEGER (PK) | Auto-increment |
+| `email_or_password_hash` | TEXT | SHA1 hash prefix |
+| `breach_found` | BOOLEAN | True if found in breach |
+| `breach_details` | TEXT | JSON of breach details |
+| `timestamp` | DATETIME | Time of check |
+
+---
+
+## 📁 PROJECT FOLDER STRUCTURE
+
+```
+YA_Defender/
+├── YA_Defender.sln
+├── src/
+│   ├── YA_Defender.WPF/
+│   │   ├── App.xaml
+│   │   ├── App.xaml.cs
+│   │   ├── MainWindow.xaml
+│   │   ├── MainWindow.xaml.cs
+│   │   ├── Views/
+│   │   │   ├── HomeView.xaml
+│   │   │   ├── ScanView.xaml
+│   │   │   ├── QuarantineView.xaml
+│   │   │   └── ProfileView.xaml
+│   │   ├── ViewModels/
+│   │   │   ├── HomeViewModel.cs
+│   │   │   ├── ScanViewModel.cs
+│   │   │   ├── QuarantineViewModel.cs
+│   │   │   └── ProfileViewModel.cs
+│   │   ├── Models/
+│   │   │   ├── ThreatModel.cs
+│   │   │   ├── ProcessEvent.cs
+│   │   │   ├── FileEvent.cs
+│   │   │   ├── RegistryEvent.cs
+│   │   │   └── NetworkEvent.cs
+│   │   ├── Services/
+│   │   │   ├── ScanService.cs
+│   │   │   ├── MonitorService.cs
+│   │   │   ├── AIService.cs
+│   │   │   ├── QuarantineService.cs
+│   │   │   ├── RansomwareShieldService.cs
+│   │   │   ├── RegistryGuardianService.cs
+│   │   │   ├── DNSQuarantineService.cs
+│   │   │   ├── USBGuardianService.cs
+│   │   │   ├── SystemRepairService.cs
+│   │   │   ├── BreachCheckService.cs
+│   │   │   ├── VoiceCommandService.cs (Rhino)
+│   │   │   ├── TTSService.cs (KokoroSharp)
+│   │   │   └── ReportService.cs
+│   │   ├── Utils/
+│   │   │   ├── DatabaseHelper.cs
+│   │   │   ├── EncryptionHelper.cs
+│   │   │   ├── EntropyCalculator.cs
+│   │   │   └── ProcessHelper.cs
+│   │   └── Resources/
+│   │       ├── Icons/
+│   │       ├── Sounds/
+│   │       └── Models/
+│   │           ├── xgboost_pe.onnx
+│   │           ├── gru_behavior.onnx
+│   │           └── cnn_anomaly.onnx
+│   ├── YA_Defender.Service/
+│   │   ├── Program.cs
+│   │   ├── ServiceMain.cs
+│   │   └── ServiceInstaller.cs
+│   └── YA_Defender.Shared/
+│       ├── Database/
+│       │   └── SQLiteDbContext.cs
+│       └── Models/
+│           └── SharedModels.cs
+├── docs/
+│   ├── UserManual.pdf
+│   └── API_Integration.md
+└── installer/
+    ├── Setup.iss
+    └── YA_Defender.Setup.exe
+```
+
+---
+
+## 🔧 INSTALLATION & SYSTEM REQUIREMENTS
+
+**Hardware Requirements:**
+- CPU: Intel Core i5 or AMD Ryzen 3 (or equivalent)
+- RAM: 4GB (8GB recommended)
+- Storage: 2GB free space
+- OS: Windows 10 1709+ or Windows 11
+
+**Software Prerequisites:**
+- .NET 8 Runtime (installed automatically)
+- Windows 10/11 with all updates
+
+**Installation Steps:**
+1. Run `YA_Defender.Setup.exe` as Administrator
+2. Accept the license agreement
+3. Choose installation folder (default: `C:\Program Files\YA_Defender`)
+4. Installation will:
+   - Install YA Defender application
+   - Install Windows Service (`YA_Defender.Service.exe`)
+   - Add startup entry to Registry
+   - Add firewall exceptions
+5. Launch YA Defender from Desktop shortcut or Start Menu
+
+---
+
+## 🎯 THE 5 RECOMMENDED KILLER FEATURES (EASY TO ADD)
+
+These 5 features are **easy to code** (leveraging existing Windows APIs) but have **massive impact** that will differentiate YA Defender from every other hackathon project.
+
+### 1. Process Tree Visualizer
+- **Code Time**: 2 hours
+- **What it does**: Live animated graph showing malware attack chain
+- **Why it wins**: Visual story of the attack → judges love it
+- **Technology**: WPF Canvas + WMI `Win32_Process` query for ParentPID
+
+### 2. Network DNS Quarantine
+- **Code Time**: 30 minutes
+- **What it does**: Block malicious domains via Windows hosts file
+- **Why it wins**: Stops data exfiltration instantly, no firewall rules needed
+- **Technology**: `File.AppendAllText(hostsPath, $"0.0.0.0 {domain}")`
+
+### 3. USB Drive Guardian
+- **Code Time**: 1 hour
+- **What it does**: Auto-scan removable drives for malware
+- **Why it wins**: Blocks ransomware that spreads via USB
+- **Technology**: `DriveInfo` + `FileSystemWatcher` + PE Scanner
+
+### 4. One-Click System Repair
+- **Code Time**: 1 hour
+- **What it does**: Run SFC, DISM, CHKDSK to fix corrupted system files
+- **Why it wins**: Actually fixes the damage, not just detects it
+- **Technology**: `Process.Start("sfc", "/scannow")` + progress bar
+
+### 5. HaveIBeenPwned Integration
+- **Code Time**: 1 hour
+- **What it does**: Check browser passwords against data breaches
+- **Why it wins**: Identity protection → adds a "security suite" dimension
+- **Technology**: SHA1 hash prefix → HIBP API → alert user
+
+---
+
+## 📜 COMPLETE ULTIMATE PROMPT (Copy & Paste)
+
+```markdown
+# YA DEFENDER – Complete Windows Malware Defense System
+# Developed by Yasir Abbas
+
+## PROJECT OVERVIEW
+Build a professional, military-grade Windows malware defense system called "YA DEFENDER" in C# .NET 8 with WPF UI.
+
+## CORE PHILOSOPHY
+YA Defender doesn't just detect malware – it visualizes the attack chain, blocks network exfiltration, repairs damaged system files, protects user identities, and stops real-world threats like ransomware, RATs, and fileless malware.
+
+## 28 CORE FEATURES (Implement ALL)
+
+### DETECTION & ANALYSIS
+1. **PE File Analyzer** – Parse DOS/PE headers, sections, imports/exports, entropy (0-8), detect packers (UPX, Themida, Enigma). Use PeNet library.
+2. **ONNX AI Engine** – Load 3 models from /Models/: XGBoost-RF (15MB) for PE static classification, GRU-DNN (25MB) for behavioral sequences, CNN+Autoencoder (20MB) for anomaly detection. Extract 128 features. Return threat type (Ransomware/Spyware/Trojan/Backdoor/Adware/Worm/Rootkit) and risk score (0-100).
+3. **AMSI Integration** – Scan PowerShell, VBS, Python scripts before execution. Use Windows AMSI COM interface. Block if malicious signatures found.
+4. **Memory Scanner (YARA)** – Bundle 100+ YARA rules. Scan process memory for shellcode, reflective DLL injection, process hollowing. Use ReadProcessMemory API.
+5. **USB Drive Guardian** – Monitor for new removable drives. Auto-scan root for autorun.inf, .exe, .scr, .vbs. Quarantine suspicious files. Use DriveInfo + FileSystemWatcher.
+
+### MONITORING & DEFENSE
+6. **Real-Time ETW Monitor** – Monitor process creation, file system writes, registry changes, network connections via Event Tracing for Windows. Log all events to SQLite.
+7. **Registry Guardian** – Monitor HKCU\Software\Microsoft\Windows\CurrentVersion\Run, HKLM\SOFTWARE\...\Run, Services keys. Revert suspicious changes instantly. Use WMI RegistryKeyChangeEvent + RegNotifyChangeKeyValue.
+8. **Process Tree Visualizer** – Live animated WPF graph showing Parent/Child process relationships. Highlight malicious processes in red. Use WMI Win32_Process to build tree.
+9. **Network DNS Quarantine** – When malware tries to call home, append malicious domain to Windows hosts file (C:\Windows\System32\drivers\etc\hosts) mapping to 127.0.0.1. Blocklist Discord API, Telegram API, known C2 domains.
+10. **Ransomware Shield** – Detect mass file encryption (entropy > 7.5 + file write rate > 50/sec). Suspend process via NtSuspendThread. Trigger Volume Shadow Copy rollback. Backup last 10 modified files.
+
+### REMEDIATION & RECOVERY
+11. **One-Click System Repair** – "Fix My PC" button runs SFC /SCANNOW, DISM /Online /Cleanup-Image /RestoreHealth, CHKDSK C: /F /R. Show progress bar and live logs.
+12. **Auto-Restore Point** – Create System Restore Point before any quarantine or deletion. Use SystemRestore COM object.
+13. **Quarantine (AES-256)** – Store suspicious files encrypted. Provide Restore, Delete, and Upload to Cloud options. Use System.Security.Cryptography.
+
+### VOICE & CHAT INTERFACE (Multilingual)
+14. **Voice Commands** – Rhino Speech-to-Intent for English and Urdu. Commands: "Analyze this file", "Full system scan", "Report", "Clean", "Quarantine", "Show me the file", "Status", "Update AI model".
+15. **Text-to-Speech** – KokoroSharp (ONNX TTS) for natural voice responses in English/Urdu.
+16. **Chat Interface** – Interactive chat (WhatsApp style) with user/system bubbles. Chat history stored in SQLite. Export as .txt/.json.
+17. **Continuous Listening/Speaking** – Toggle "Always Listening" (wake word: "Hey YA Defender") and "Always Speaking" modes.
+
+### UI & FORENSICS
+18. **Live Dashboard** – Real-time event feed, threat radar animation, MITRE ATT&CK mapping display, attack map (Geo-IP). Dark theme (#0A192F, #00B4D8, #FFD700).
+19. **Threat Hunter Search** – Search bar for logs: `process:powershell.exe`, `file:*.exe`, `ip:185.*`. Use SQLite LIKE queries.
+20. **Clickable File Paths** – Every file path opens Windows Explorer with file highlighted. Use Process.Start("explorer.exe", "/select, " + filePath).
+21. **Drag-and-Drop** – Drop files/folders onto app or chat input; auto-analyze.
+22. **Layered Progress Bars** – Show progress for Cache, Local AI, and APIs simultaneously.
+23. **Live Terminal Log** – Scrollable real-time log with timestamps and color codes.
+24. **ETA Calculator** – Moving average estimated time remaining.
+25. **File Icons/Thumbnails** – Display file type icons or extracted thumbnails.
+
+### IDENTITY & EXTRA
+26. **HaveIBeenPwned Integration** – Hash browser passwords (SHA1), query HIBP API (v3) with hash prefix. Alert if breached. Use HttpClient.
+27. **Scheduled Scans** – Daily/Weekly/Custom background scans (silent if AFK) with Windows notifications.
+28. **Real-Time File Watcher** – Monitor Downloads, Desktop, Documents; auto-scan new files instantly.
+
+### CLOUD API INTEGRATION (Free Tiers)
+- VirusTotal, Hybrid Analysis, MalwareBazaar, AlienVault OTX, MetaDefender, Alibaba Cloud.
+- Parallel query + smart caching (TTL: 7d/24h/1h).
+
+## UI LAYOUT – 4 TABS
+- **HOME**: Live dashboard with chat split view, threat feed, process tree visualizer, attack map, search bar.
+- **SCAN**: Quick/Full/Custom/USB scan buttons, drag-drop zone, progress bars, results list with clickable file paths.
+- **QUARANTINE**: List of threats (file name, type, risk, date). Actions: Restore, Delete, Upload.
+- **PROFILE**: Protection toggles, voice settings, AI models (status + update), identity protection, system repair, export logs.
+
+## DATABASE – 7 TABLES
+1. process_events: id, process_name, pid, parent_pid, command_line, user, timestamp, is_suspicious
+2. file_events: id, file_path, action, size, entropy, process_pid, timestamp, is_suspicious
+3. registry_events: id, key_path, value_name, value_data, action, process_pid, timestamp, is_suspicious
+4. network_events: id, destination_ip, destination_port, protocol, process_pid, timestamp, is_suspicious
+5. scan_results: id, file_path, file_hash, risk_score, threat_type, detection_method, is_quarantined, timestamp
+6. quarantine: id, original_path, file_name, file_hash, threat_type, risk_score, quarantine_path, timestamp, restored
+7. breach_checks: id, email_or_password_hash, breach_found, breach_details, timestamp
+
+## AI MODELS
+Placeholder ONNX files in /Resources/Models/:
+- xgboost_pe.onnx (15MB)
+- gru_behavior.onnx (25MB)
+- cnn_anomaly.onnx (20MB)
+Load using ONNX Runtime. If models not found, use fallback heuristic detection.
+
+## KILLER FEATURES (EASY TO ADD)
+1. **Process Tree Visualizer** – WPF Canvas + WMI queries. Shows attack chain visually.
+2. **Network DNS Quarantine** – Append to hosts file. Blocks data exfiltration.
+3. **USB Drive Guardian** – Auto-scan removable drives. Blocks USB-spread malware.
+4. **One-Click System Repair** – SFC + DISM + CHKDSK. Fixes malware damage.
+5. **HaveIBeenPwned** – HIBP API integration. Identity protection.
+
+## SELF-DEFENSE
+- Prevent uninstallation (Device Admin equivalent for Windows)
+- Auto-restart on crash
+- App integrity check (signature verification)
+- Protected process (Windows Service)
+
+## PERFORMANCE
+- File scan <200ms
+- Real-time monitoring <50ms latency
+- Memory usage <300MB
+- CPU usage <5% idle, <30% scanning
+
+## DELIVERABLES
+Complete Visual Studio 2022 solution with:
+- WPF application (YA_Defender.WPF)
+- Windows Service (YA_Defender.Service)
+- Shared library (YA_Defender.Shared)
+- SQLite database schema
+- ONNX model placeholders
+- WiX installer
+- Working executable (.exe)
+- User manual (PDF)
+
+## ADDITIONAL REQUIREMENTS
+- Dark theme (#0A192F, #00B4D8, #FFD700)
+- MVVM architecture
+- Async/await for all I/O operations
+- Comprehensive error handling and logging
+- Admin privileges required (UAC prompt)
+- Windows 10/11 compatibility
+- Include "Created by Yasir Abbas" in the About/Profile tab
+```
+
+---
+
