@@ -1,0 +1,141 @@
+<UserControl x:Class="YA_Defender.WPF.Views.ProfileView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             Background="{StaticResource BgBrush}">
+    <Grid Margin="18">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="200" />
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0">
+            <TextBlock Text="PROFILE" FontSize="22" FontWeight="Bold" />
+            <TextBlock Text="Protection settings, cloud API keys, system repair and logs"
+                       Style="{StaticResource SubtitleStyle}" />
+        </StackPanel>
+
+        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" Margin="0,14,0,10">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <Border Grid.Row="0" Grid.Column="0" Style="{StaticResource CardStyle}" Margin="0,0,6,6">
+                    <StackPanel>
+                        <TextBlock Text="PROTECTION SETTINGS" Style="{StaticResource CardTitleStyle}" />
+                        <CheckBox Content="Real-Time Monitoring (process/file/network)" IsChecked="{Binding RealTime}" Margin="0,4" />
+                        <CheckBox Content="Auto-Quarantine threats on detection" IsChecked="{Binding AutoQuarantine}" Margin="0,4" />
+                        <CheckBox Content="Ransomware Shield (entropy + mass-write detection)" IsChecked="{Binding RansomwareShield}" Margin="0,4" />
+                        <CheckBox Content="Registry Guardian (revert persistence changes)" IsChecked="{Binding RegistryGuardian}" Margin="0,4" />
+                        <CheckBox Content="USB Drive Scanner" IsChecked="{Binding UsbScanner}" Margin="0,4" />
+                        <CheckBox Content="Cloud Scanning (VirusTotal, MalwareBazaar)" IsChecked="{Binding CloudScanning}" Margin="0,4" />
+                        <CheckBox Content="Scheduled daily scans" IsChecked="{Binding ScheduledScans}" Margin="0,4" />
+                        <TextBlock Text="{Binding StatusText}" FontSize="11" Foreground="{StaticResource AccentBrush}" Margin="0,8,0,0" />
+                    </StackPanel>
+                </Border>
+
+                <Border Grid.Row="0" Grid.Column="1" Style="{StaticResource CardStyle}" Margin="6,0,0,6">
+                    <StackPanel>
+                        <TextBlock Text="CLOUD API KEYS (OPTIONAL)" Style="{StaticResource CardTitleStyle}" />
+                        <TextBlock Text="Provide your own keys to enable live cloud verdicts. Leave blank to use free MalwareBazaar only."
+                                   Style="{StaticResource SubtitleStyle}" TextWrapping="Wrap" />
+                        <TextBlock Text="VirusTotal API Key" FontSize="11" Margin="0,10,0,2" Foreground="{StaticResource TextDimBrush}" />
+                        <PasswordBox x:Name="VtPassword" PasswordChanged="VtPassword_Changed" />
+                        <TextBlock Text="Hybrid Analysis API Key" FontSize="11" Margin="0,10,0,2" Foreground="{StaticResource TextDimBrush}" />
+                        <PasswordBox x:Name="HaPassword" PasswordChanged="HaPassword_Changed" Margin="0,0,0,10" />
+                        <Button Content="Save Keys" Style="{StaticResource PrimaryButton}" HorizontalAlignment="Left"
+                                Command="{Binding SaveKeysCommand}" Padding="18,8" />
+                    </StackPanel>
+                </Border>
+
+                <Border Grid.Row="1" Grid.Column="0" Style="{StaticResource CardStyle}" Margin="0,6,6,0">
+                    <DockPanel>
+                        <TextBlock DockPanel.Dock="Top" Text="AI &amp; DETECTION ENGINE" Style="{StaticResource CardTitleStyle}" />
+                        <TextBlock DockPanel.Dock="Top" Text="{Binding EngineStatus}" Style="{StaticResource SubtitleStyle}" TextWrapping="Wrap" Margin="0,0,0,8" />
+                        <StackPanel>
+                            <TextBlock Text="PE Analyzer: active (static headers, imports, entropy, packers)" FontSize="12" Margin="0,2" />
+                            <TextBlock Text="Heuristic Engine: active (unknown-threat behavior scoring)" FontSize="12" Margin="0,2" />
+                            <TextBlock Text="Signature Engine: active (40+ YARA-style rules)" FontSize="12" Margin="0,2" />
+                            <TextBlock Text="Cloud Layer: on-demand hashing to 3 providers" FontSize="12" Margin="0,2" />
+                        </StackPanel>
+                    </DockPanel>
+                </Border>
+
+                <Border Grid.Row="1" Grid.Column="1" Style="{StaticResource CardStyle}" Margin="6,6,0,0">
+                    <DockPanel>
+                        <TextBlock DockPanel.Dock="Top" Text="EXPORT &amp; LOGS" Style="{StaticResource CardTitleStyle}" />
+                        <StackPanel>
+                            <Button Content="Export All Logs (ZIP)" Style="{StaticResource GhostButton}" Margin="0,4"
+                                    HorizontalAlignment="Stretch" Command="{Binding ExportLogsCommand}" />
+                            <Button Content="Clear All Logs" Style="{StaticResource GhostButton}" Margin="0,4"
+                                    HorizontalAlignment="Stretch" Command="{Binding ClearLogsCommand}" />
+                            <Button Content="Create System Restore Point" Style="{StaticResource GhostButton}" Margin="0,4"
+                                    HorizontalAlignment="Stretch" Command="{Binding RestorePointCommand}" />
+                            <TextBlock Margin="0,6,0,0" FontSize="10" Foreground="{StaticResource TextDimBrush}"
+                                       Text="Recommended before any large remediation action." />
+                        </StackPanel>
+                    </DockPanel>
+                </Border>
+
+                <Border Grid.Row="2" Grid.ColumnSpan="2" Style="{StaticResource CardStyle}" Margin="0,6,0,0">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0" Text="SELF-DEFENSE &amp; STARTUP" Style="{StaticResource CardTitleStyle}" Margin="0,0,30,0" />
+                        <StackPanel Grid.Column="1">
+                            <CheckBox Content="Start YA Defender with Windows" IsChecked="{Binding StartWithWindows}" Margin="0,2" />
+                            <TextBlock Text="All self-defense options are OFF by default and require explicit consent."
+                                       FontSize="10" Foreground="{StaticResource TextDimBrush}" Margin="0,2,0,0" />
+                        </StackPanel>
+                        <TextBlock Grid.Column="2" Text="{Binding ServiceStatus}" VerticalAlignment="Center"
+                                   FontSize="11" Foreground="{StaticResource TextDimBrush}" Margin="12,0" />
+                        <Button Grid.Column="3" Content="Install Service" Style="{StaticResource GhostButton}"
+                                Padding="12,6" FontSize="11" Command="{Binding InstallServiceCommand}" Margin="0,0,6,0" />
+                        <Button Grid.Column="4" Content="Remove Service" Style="{StaticResource DangerButton}"
+                                Padding="12,6" FontSize="11" Command="{Binding UninstallServiceCommand}" />
+                    </Grid>
+                </Border>
+            </Grid>
+        </ScrollViewer>
+
+        <Border Grid.Row="2" Style="{StaticResource CardStyle}">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="200" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <StackPanel Grid.Column="0">
+                    <TextBlock Text="SYSTEM REPAIR" Style="{StaticResource CardTitleStyle}" />
+                    <Button Content="SFC /SCANNOW" Style="{StaticResource PrimaryButton}" Margin="0,4" HorizontalAlignment="Stretch"
+                            Command="{Binding SfcCommand}" />
+                    <Button Content="DISM RestoreHealth" Style="{StaticResource GhostButton}" Margin="0,4" HorizontalAlignment="Stretch"
+                            Command="{Binding DismCommand}" />
+                    <Button Content="CHKDSK C: /F /R" Style="{StaticResource DangerButton}" Margin="0,4" HorizontalAlignment="Stretch"
+                            Command="{Binding ChkdskCommand}" />
+                </StackPanel>
+                <Border Grid.Column="1" Margin="10,0,0,0" Background="#060D1D" CornerRadius="6" Padding="8">
+                    <ListBox ItemsSource="{Binding RepairLog}" Background="Transparent" BorderThickness="0"
+                             VirtualizingPanel.IsVirtualizing="False" FontFamily="Consolas" FontSize="11">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding}" Foreground="#4CC38A" />
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </Border>
+            </Grid>
+        </Border>
+    </Grid>
+</UserControl>
